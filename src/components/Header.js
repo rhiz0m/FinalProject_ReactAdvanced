@@ -1,13 +1,13 @@
-import React, { useEffect, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useRef } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import {
   faGithub,
   faLinkedin,
   faMedium,
   faStackOverflow,
-} from "@fortawesome/free-brands-svg-icons";
-import { Box, HStack } from "@chakra-ui/react";
+} from "@fortawesome/free-brands-svg-icons"
+import { Box, HStack, Link } from "@chakra-ui/react"
 
 const socials = [
   {
@@ -30,19 +30,19 @@ const socials = [
     icon: faStackOverflow,
     url: "https://stackoverflow.com",
   },
-];
+]
 
 const Header = () => {
   const handleClick = (anchor) => () => {
-    const id = `${anchor}-section`;
-    const element = document.getElementById(id);
+    const id = `${anchor}-section`
+    const element = document.getElementById(id)
     if (element) {
       element.scrollIntoView({
         behavior: "smooth",
         block: "start",
-      });
+      })
     }
-  };
+  }
 
   return (
     <Box
@@ -64,7 +64,13 @@ const Header = () => {
           alignItems="center"
         >
           <nav>
-            {/* Add social media links based on the `socials` data */}
+            <HStack>
+              {socials.map(({ icon, url }, index) => (
+                <Link key={index} href={url} isExternal>
+                  <FontAwesomeIcon icon={icon} size="2x" color="white" />
+                </Link>
+              ))}
+            </HStack>
           </nav>
           <nav>
             <HStack spacing={8}>
@@ -74,6 +80,6 @@ const Header = () => {
         </HStack>
       </Box>
     </Box>
-  );
-};
-export default Header;
+  )
+}
+export default Header
