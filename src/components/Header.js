@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import {
   faGithub,
@@ -7,34 +6,41 @@ import {
   faMedium,
   faStackOverflow,
 } from "@fortawesome/free-brands-svg-icons"
-import { Box, HStack, Link } from "@chakra-ui/react"
-
-const socials = [
-  {
-    icon: faEnvelope,
-    url: "mailto: hello@example.com",
-  },
-  {
-    icon: faGithub,
-    url: "https://github.com",
-  },
-  {
-    icon: faLinkedin,
-    url: "https://www.linkedin.com",
-  },
-  {
-    icon: faMedium,
-    url: "https://medium.com",
-  },
-  {
-    icon: faStackOverflow,
-    url: "https://stackoverflow.com",
-  },
-]
+import { Box, HStack } from "@chakra-ui/react"
+import InternalNav from "../navigation/header/internalNav"
+import ExternalNav from "../navigation/header/externalNav"
 
 const Header = () => {
-  const handleClick = (anchor) => () => {
-    const id = `${anchor}-section`
+  const externalLinks = [
+    {
+      icon: faEnvelope,
+      url: "mailto: hello@example.com",
+    },
+    {
+      icon: faGithub,
+      url: "https://github.com",
+    },
+    {
+      icon: faLinkedin,
+      url: "https://www.linkedin.com",
+    },
+    {
+      icon: faMedium,
+      url: "https://medium.com",
+    },
+    {
+      icon: faStackOverflow,
+      url: "https://stackoverflow.com",
+    },
+  ]
+
+  const internalLinks = [
+    { href: "/#contact-me", id: "contactme-section", name: "Contact Me" },
+    { href: "/#projects", id: "projects-section", name: "Projects" },
+  ]
+
+  const handleClick = (id) => (event) => {
+    event.preventDefault()
     const element = document.getElementById(id)
     if (element) {
       element.scrollIntoView({
@@ -64,18 +70,10 @@ const Header = () => {
           alignItems="center"
         >
           <nav>
-            <HStack>
-              {socials.map(({ icon, url }, index) => (
-                <Link key={index} href={url} isExternal>
-                  <FontAwesomeIcon icon={icon} size="2x" color="white" />
-                </Link>
-              ))}
-            </HStack>
+            <ExternalNav links={externalLinks} />
           </nav>
           <nav>
-            <HStack spacing={8}>
-              {/* Add links to Projects and Contact me section */}
-            </HStack>
+            <InternalNav links={internalLinks} handleClick={handleClick}/>
           </nav>
         </HStack>
       </Box>
