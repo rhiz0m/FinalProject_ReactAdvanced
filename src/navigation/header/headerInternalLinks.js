@@ -1,6 +1,6 @@
 import { HStack } from "@chakra-ui/react"
 
-const InternalNav = ({ links, handleClick }) => {
+const headerInternalLinks = ({ links, handleClick }) => {
   return (
     <HStack spacing={8}>
       {links.map(({ href, name, id }, index) => (
@@ -17,4 +17,4 @@ const InternalNav = ({ links, handleClick }) => {
   )
 }
 
-export default InternalNav
+export default headerInternalLinks
