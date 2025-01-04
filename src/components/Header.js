@@ -7,7 +7,7 @@ import {
   faStackOverflow,
 } from "@fortawesome/free-brands-svg-icons"
 import { Box, HStack } from "@chakra-ui/react"
-import headerInternalLinks from "../navigation/header/headerInternalLinks"
+import HeaderInternalLinks from "../navigation/header/headerInternalLinks"
 import HeaderExternalLinks from "../navigation/header/headerExternalLinks"
 
 const Header = () => {
@@ -73,7 +73,7 @@ const Header = () => {
             <HeaderExternalLinks links={externalLinks} />
           </nav>
           <nav>
-            <headerInternalLinks links={internalLinks} handleClick={handleClick}/>
+            <HeaderInternalLinks links={internalLinks} handleClick={handleClick}/>
           </nav>
         </HStack>
       </Box>
