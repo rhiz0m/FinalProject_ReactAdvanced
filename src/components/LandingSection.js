@@ -19,7 +19,7 @@ const LandingSection = () => (
         <Text fontSize="md">{greeting}</Text>
       </Stack>
 
-      <Heading as="h1">
+      <Heading as="h1" >
         {bio1}
         <br />
         {bio2}

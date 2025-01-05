@@ -1,20 +1,23 @@
-import { HStack } from "@chakra-ui/react"
+import { HStack, Link as ChakraLink } from "@chakra-ui/react"
 
-const headerInternalLinks = ({ links, handleClick }) => {
+const HeaderInternalLinks = ({ links, handleClick }) => {
   return (
     <HStack spacing={8}>
       {links.map(({ href, name, id }, index) => (
-        <a
+        <ChakraLink
           key={index}
           href={href}
-          onClick={handleClick(id)}
-          style={{ textDecoration: "none", cursor: "pointer" }}
+          onClick={() => handleClick(id)}
+          textDecoration="none"
+          cursor="pointer"
+          fontWeight="semibold" 
+          _hover={{ textDecoration: "none" }}
         >
           {name}
-        </a>
+        </ChakraLink>
       ))}
     </HStack>
   )
 }
 
-export default headerInternalLinks
+export default HeaderInternalLinks
