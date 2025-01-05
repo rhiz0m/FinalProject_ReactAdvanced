@@ -3,14 +3,14 @@ import { HStack, Link as ChakraLink } from "@chakra-ui/react"
 const HeaderInternalLinks = ({ links, handleClick }) => {
   return (
     <HStack spacing={8}>
-      {links.map(({ href, name, id }, index) => (
+      {links.map(({ name, id }, index) => (
         <ChakraLink
           key={index}
-          href={href}
+          href={`#${id}`}
           onClick={() => handleClick(id)}
           textDecoration="none"
           cursor="pointer"
-          fontWeight="semibold" 
+          fontWeight="semibold"
           _hover={{ textDecoration: "none" }}
         >
           {name}

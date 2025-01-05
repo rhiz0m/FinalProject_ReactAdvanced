@@ -31,11 +31,8 @@ const LandingSection = () => {
     onSubmit: async (values) => {
       try {
         await submit(values)
-        onOpen(response.type, response.message)
-      } catch {
-        ;(error) => {
-          console.log("Error when submitting the form", error)
-        }
+      } catch (error) {
+        console.error("Error when submitting the form", error)
       }
     },
     validationSchema: Yup.object({
@@ -46,11 +43,25 @@ const LandingSection = () => {
       email: Yup.string().email().required(),
       type: Yup.string().required(),
       comment: Yup.string()
-        .min(5, "Comment must be at least 5 charachters")
-        .max(200, "Comment cannot exeed 200 charachters")
+        .min(5, "Comment must be at least 5 characters")
+        .max(200, "Comment cannot exceed 200 characters")
         .required(),
     }),
   })
+
+  useEffect(() => {
+    if (response) {
+      if (response.type === "success") {
+        onOpen(
+          "success",
+          `Thank you ${formik.values.firstName}, ${response.message}`
+        )
+        formik.resetForm() 
+      } else if (response.type === "error") {
+        onOpen("error", response.message)
+      }
+    }
+  }, [response, formik, onOpen])
 
   return (
     <FullScreenSection
@@ -64,7 +75,7 @@ const LandingSection = () => {
           Contact me
         </Heading>
         <Box p={6} rounded="md" w="100%">
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             <VStack spacing={4}>
               <FormControl
                 isInvalid={formik.touched.firstName && formik.errors.firstName}
@@ -105,12 +116,24 @@ const LandingSection = () => {
                 </Select>
                 <FormErrorMessage>{formik.errors.type}</FormErrorMessage>
               </FormControl>
-              <FormControl isInvalid={formik.touched.comment && formik.errors.comment}>
+              <FormControl
+                isInvalid={formik.touched.comment && formik.errors.comment}
+              >
                 <FormLabel htmlFor="comment">Your message</FormLabel>
-                <Textarea id="comment" name="comment" height={250} {...formik.getFieldProps("comment")} />
+                <Textarea
+                  id="comment"
+                  name="comment"
+                  height={250}
+                  {...formik.getFieldProps("comment")}
+                />
                 <FormErrorMessage>{formik.errors.comment}</FormErrorMessage>
               </FormControl>
-              <Button type="submit" colorScheme="purple" width="full">
+              <Button
+                type="submit"
+                colorScheme="purple"
+                width="full"
+                isLoading={isLoading}
+              >
                 Submit
               </Button>
             </VStack>
