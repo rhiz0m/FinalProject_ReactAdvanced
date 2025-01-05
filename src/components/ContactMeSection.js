@@ -30,7 +30,7 @@ const LandingSection = () => {
     },
     onSubmit: async (values) => {
       try {
-        await submit(values)
+        await submit("https://api.example.com/submit", values)
       } catch (error) {
         console.error("Error when submitting the form", error)
       }
@@ -56,7 +56,7 @@ const LandingSection = () => {
           "success",
           `Thank you ${formik.values.firstName}, ${response.message}`
         )
-        formik.resetForm() 
+        formik.resetForm()
       } else if (response.type === "error") {
         onOpen("error", response.message)
       }
